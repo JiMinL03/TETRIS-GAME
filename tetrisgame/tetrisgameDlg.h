@@ -13,6 +13,7 @@ class CtetrisgameDlg : public CDialogEx
 // 생성입니다.
 public:
 	CtetrisgameDlg(CWnd* pParent = nullptr);	// 표준 생성자입니다.
+	afx_msg void StopTimer();
 // 대화 상자 데이터입니다.
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_TETRISGAME_DIALOG };
@@ -21,7 +22,7 @@ public:
 	protected:
 	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV 지원입니다.
 
-
+	
 // 구현입니다.
 protected:
 	HICON m_hIcon;
@@ -37,10 +38,8 @@ protected:
 	TetrisPanel m_TetrisPanel;
 	NextBlockPanel m_NextBlockPanel;
 
-
-
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
+	
 public:
 	afx_msg void OnBnClickedStart();
-	virtual INT_PTR DoModal();
 };

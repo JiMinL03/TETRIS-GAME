@@ -39,7 +39,7 @@ void NextBlockPanel::OnPaint() {
     int blockHeight = board.getHeight();
     for (int y = 0; y < blockWidth; y++) {
         for (int x = 0; x < blockHeight; x++) {
-            int cellValue = board.getBlock()[y * BOARD_WIDTH + x];
+            int cellValue = board.getBlock()[x * BOARD_WIDTH + y];
             if (cellValue != 0) {
                 int left = x * (cellWidth + 2);
                 int top = y * (cellHeight + 2);
