@@ -2,6 +2,7 @@
 #include "TetrisPanel.h"
 #include "Tetris.h"
 #include <iostream>
+#include "tetrisgameDlg.h"
 using namespace std;
 TetrisPanel::TetrisPanel() {
 
@@ -13,7 +14,6 @@ TetrisPanel::~TetrisPanel() {
 void TetrisPanel::OnTimer(UINT_PTR nIDEvent) {
     game.moveBlock(0);
     Invalidate();
-
     CStatic::OnTimer(nIDEvent);
 }
 
@@ -85,8 +85,8 @@ void TetrisPanel::OnPaint() {
 
 
 	if (game.isGameOver()) {
+        ((CtetrisgameDlg*)GetParent())->StopTimer();  // StopTimer 함수 호출
 		AfxMessageBox(_T("GAME OVER"), MB_ICONERROR | MB_OK);
-		KillTimer(ID_AUTO_MOVE_TIMER);
 	}
     
 }

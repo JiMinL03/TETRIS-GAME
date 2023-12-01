@@ -139,6 +139,11 @@ void CtetrisgameDlg::OnTimer(UINT_PTR nIDEvent)
 
 	CDialogEx::OnTimer(nIDEvent);
 }
+void CtetrisgameDlg::StopTimer()
+{
+	// ID_AUTO_MOVE_TIMER 타이머를 중지
+	KillTimer(ID_AUTO_MOVE_TIMER);
+}
 //--------------------------------------------------------------------------------------------------
 void CtetrisgameDlg::OnSysCommand(UINT nID, LPARAM lParam)
 {
@@ -189,13 +194,4 @@ HCURSOR CtetrisgameDlg::OnQueryDragIcon()
 void CtetrisgameDlg::OnBnClickedStart()
 {
 	//OnInitDialog();
-}
-
-
-// 건들 ㄴㄴ
-INT_PTR CtetrisgameDlg::DoModal()
-{
-	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
-
-	return CDialogEx::DoModal();
 }
