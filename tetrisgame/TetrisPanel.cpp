@@ -24,6 +24,7 @@ BEGIN_MESSAGE_MAP(TetrisPanel, CStatic)
 END_MESSAGE_MAP()
 
 void TetrisPanel::OnPaint() {
+
     CPaintDC dc(this);
     CRect rect;
     GetClientRect(&rect);
@@ -81,33 +82,29 @@ void TetrisPanel::OnPaint() {
                 }
             }
         }
-
-	if (game.isGameOver() && !isGameOver) {
-        for (int row = 0; row < 20; row++) {
-            for (int col = 0; col < 10; col++) {
-                int left = col * (cellWidth + 2);
-                int top = row * (cellHeight + 2);
-                int right = left + cellWidth;
-                int bottom = top + cellHeight;
-
-                CRect cellRect(left, top, right, bottom);
-                dc.Rectangle(&cellRect);
-                dc.FillSolidRect(&cellRect, RGB(220, 220, 215));
-            }
+        if (!game.isGameOver()) {
+            isGameOver = true;
         }
+        if (game.isGameOver() && isGameOver) {
+            HandleGameOverAndRestart();
+        }
+	}
+
+void TetrisPanel::HandleGameOverAndRestart()
+{
+
         ((CtetrisgameDlg*)GetParent())->StopTimer();  // StopTimer 함수 호출
         int result = AfxMessageBox(_T("GAME OVER! Do you want to restart?"), MB_ICONERROR | MB_YESNO);
         if (result == IDYES) {//"예" 클릭한다면
-            isGameOver = true;  // 게임 오버 초기화
             game.initGame();//게임 다시 시작하는 메서드
             Invalidate();//OnPaint 재실행
             ((CtetrisgameDlg*)GetParent())->StartTimer();
+            isGameOver = false;
         }
         else { //"아니오"를 클릭한다면
             ((CtetrisgameDlg*)GetParent())->EndDialog(IDCANCEL); //종료   
         }
-	}
-} 
+}
 
 void TetrisPanel::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) {
     switch (nChar) {
