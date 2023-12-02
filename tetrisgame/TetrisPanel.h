@@ -19,5 +19,7 @@ protected:
 private:
     Tetris game;  // Tetris 게임 객체 추가
     CString m_strMessage;
-    bool isGameOver=false;
+    bool isGameOver=true;
+
+    void HandleGameOverAndRestart();
 };
