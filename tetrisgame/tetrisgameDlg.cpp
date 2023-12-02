@@ -198,5 +198,5 @@ HCURSOR CtetrisgameDlg::OnQueryDragIcon()
 
 void CtetrisgameDlg::OnBnClickedStart()
 {
-	m_TetrisPanel.OnPaint();
+	
 }

@@ -3,6 +3,7 @@
 #include "Block.h"
 #include "Tetris.h"
 #include "resource.h"
+#include <vector>
 
 class TetrisPanel : public CStatic
 {
@@ -18,6 +19,5 @@ protected:
 private:
     Tetris game;  // Tetris 게임 객체 추가
     CString m_strMessage;
-
-    bool isGameOver = false;
+    bool isGameOver=false;
 };
