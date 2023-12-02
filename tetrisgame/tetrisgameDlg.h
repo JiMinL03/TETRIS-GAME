@@ -14,6 +14,7 @@ class CtetrisgameDlg : public CDialogEx
 public:
 	CtetrisgameDlg(CWnd* pParent = nullptr);	// 표준 생성자입니다.
 	afx_msg void StopTimer();
+	afx_msg void StartTimer();
 // 대화 상자 데이터입니다.
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_TETRISGAME_DIALOG };
