@@ -78,17 +78,27 @@ void TetrisPanel::OnPaint() {
                 else if (cellValue == 7) {
                     dc.FillSolidRect(&cellRect, RGB(128, 0, 200));
                 }
-
             }
         }
     }
 
+	if (game.isGameOver() && !isGameOver) {
+        for (int row = 0; row < 20; row++) {
+            for (int col = 0; col < 10; col++) {
+                int left = col * (cellWidth + 2);
+                int top = row * (cellHeight + 2);
+                int right = left + cellWidth;
+                int bottom = top + cellHeight;
 
-	if (game.isGameOver()) {
+                CRect cellRect(left, top, right, bottom);
+                dc.Rectangle(&cellRect);
+                dc.FillSolidRect(&cellRect, RGB(220, 220, 215));
+            }
+        }
         ((CtetrisgameDlg*)GetParent())->StopTimer();  // StopTimer 함수 호출
 		AfxMessageBox(_T("GAME OVER"), MB_ICONERROR | MB_OK);
+        isGameOver = true;
 	}
-    
 }
 void TetrisPanel::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) {
     switch (nChar) {

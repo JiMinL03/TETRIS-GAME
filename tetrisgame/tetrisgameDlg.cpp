@@ -94,6 +94,7 @@ BOOL CtetrisgameDlg::OnInitDialog()
 	//--------------------------------------------------------------------------------------------------
 
 	SetWindowText(_T("TETRIS GAME")); //프레임 타이틀 제목 지정
+	SetTimer(ID_AUTO_MOVE_TIMER, 750, nullptr);
 	CRect rect;
 	GetDlgItem(IDC_STATIC1)->GetClientRect(&rect); 
 	rect.top += 89;
@@ -102,14 +103,13 @@ BOOL CtetrisgameDlg::OnInitDialog()
 	m_TetrisPanel.Create(NULL, WS_CHILD | WS_VISIBLE, rect, this);
 	CRect rectt;
 	GetDlgItem(IDC_STATIC4)->GetClientRect(&rectt); 
-	rectt.left -= 100;
+	rectt.left -= 60;
 	rectt.right += 100;
 	rectt.right += 100;
-	rectt.bottom += 200;
+	rectt.bottom += 150;
 	rectt.OffsetRect(100, 0);
 	m_NextBlockPanel.Create(NULL, WS_CHILD | WS_VISIBLE, rectt, GetDlgItem(IDC_STATIC4));
 
-	SetTimer(ID_AUTO_MOVE_TIMER, 750, nullptr);
 	return TRUE;  // 포커스를 컨트롤에 설정하지 않으면 TRUE를 반환합니다.
 }
 BOOL CtetrisgameDlg::PreTranslateMessage(MSG* pMsg)
@@ -193,5 +193,5 @@ HCURSOR CtetrisgameDlg::OnQueryDragIcon()
 
 void CtetrisgameDlg::OnBnClickedStart()
 {
-	//OnInitDialog();
+	OnInitDialog();
 }

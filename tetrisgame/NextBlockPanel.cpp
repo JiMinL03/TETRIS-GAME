@@ -34,6 +34,7 @@ void NextBlockPanel::OnPaint() {
             dc.FillSolidRect(&cellRect, RGB(220, 220, 215));
         }
     }
+
     Block board = game.getNextBlock();
     int blockWidth = board.getWidth();
     int blockHeight = board.getHeight();
