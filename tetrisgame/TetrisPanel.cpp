@@ -31,57 +31,57 @@ void TetrisPanel::OnPaint() {
 
     int cellWidth = rect.Width() / 10;
     int cellHeight = rect.Height() / 17;
-
-    for (int row = 0; row < 20; row++) {
-        for (int col = 0; col < 10; col++) {
-            int left = col * (cellWidth + 2);
-            int top = row * (cellHeight + 2);
-            int right = left + cellWidth;
-            int bottom = top + cellHeight;
-
-            CRect cellRect(left, top, right, bottom);
-            dc.Rectangle(&cellRect);
-            dc.FillSolidRect(&cellRect, RGB(220, 220, 215));
-        }
-    }
-
-    int* board = game.getBoard();
-    for (int y = 0; y < BOARD_HEIGHT; y++) {
-        for (int x = 0; x < BOARD_WIDTH; x++) {
-            int cellValue = board[y * BOARD_WIDTH + x];
-            if (cellValue != 0) {
-                int left = x * (cellWidth + 2);
-                int top = y * (cellHeight + 2);
+    if (!game.isGameOver() || isGameOver) {
+        for (int row = 0; row < 20; row++) {
+            for (int col = 0; col < 10; col++) {
+                int left = col * (cellWidth + 2);
+                int top = row * (cellHeight + 2);
                 int right = left + cellWidth;
                 int bottom = top + cellHeight;
 
                 CRect cellRect(left, top, right, bottom);
                 dc.Rectangle(&cellRect);
-                if (cellValue == 1) {
-                    dc.FillSolidRect(&cellRect, RGB(255, 0, 0));
-                }
-                else if (cellValue == 2) {
-                    dc.FillSolidRect(&cellRect, RGB(255, 165, 0));
-                }
-                else if (cellValue == 3) {
-                    dc.FillSolidRect(&cellRect, RGB(70, 130, 180));
-                }
-                else if (cellValue == 4) {
-                    dc.FillSolidRect(&cellRect, RGB(0, 200, 0));
-                }
-                else if (cellValue == 5) {
-                    dc.FillSolidRect(&cellRect, RGB(0, 0, 200));
-                }
-                else if (cellValue == 6) {
-                    dc.FillSolidRect(&cellRect, RGB(255, 105, 180));
-                }
-                else if (cellValue == 7) {
-                    dc.FillSolidRect(&cellRect, RGB(128, 0, 200));
+                dc.FillSolidRect(&cellRect, RGB(220, 220, 215));
+            }
+        }
+
+        int* board = game.getBoard();
+        for (int y = 0; y < BOARD_HEIGHT; y++) {
+            for (int x = 0; x < BOARD_WIDTH; x++) {
+                int cellValue = board[y * BOARD_WIDTH + x];
+                if (cellValue != 0) {
+                    int left = x * (cellWidth + 2);
+                    int top = y * (cellHeight + 2);
+                    int right = left + cellWidth;
+                    int bottom = top + cellHeight;
+
+                    CRect cellRect(left, top, right, bottom);
+                    dc.Rectangle(&cellRect);
+                    if (cellValue == 1) {
+                        dc.FillSolidRect(&cellRect, RGB(255, 0, 0));
+                    }
+                    else if (cellValue == 2) {
+                        dc.FillSolidRect(&cellRect, RGB(255, 165, 0));
+                    }
+                    else if (cellValue == 3) {
+                        dc.FillSolidRect(&cellRect, RGB(70, 130, 180));
+                    }
+                    else if (cellValue == 4) {
+                        dc.FillSolidRect(&cellRect, RGB(0, 200, 0));
+                    }
+                    else if (cellValue == 5) {
+                        dc.FillSolidRect(&cellRect, RGB(0, 0, 200));
+                    }
+                    else if (cellValue == 6) {
+                        dc.FillSolidRect(&cellRect, RGB(255, 105, 180));
+                    }
+                    else if (cellValue == 7) {
+                        dc.FillSolidRect(&cellRect, RGB(128, 0, 200));
+                    }
                 }
             }
         }
     }
-
 	if (game.isGameOver() && !isGameOver) {
         for (int row = 0; row < 20; row++) {
             for (int col = 0; col < 10; col++) {
@@ -95,9 +95,12 @@ void TetrisPanel::OnPaint() {
                 dc.FillSolidRect(&cellRect, RGB(220, 220, 215));
             }
         }
+
         ((CtetrisgameDlg*)GetParent())->StopTimer();  // StopTimer 함수 호출
-		AfxMessageBox(_T("GAME OVER"), MB_ICONERROR | MB_OK);
+        AfxMessageBox(_T("GAME OVER"), MB_ICONERROR | MB_OK);
         isGameOver = true;
+        Invalidate();
+        ((CtetrisgameDlg*)GetParent())->StartTimer();
 	}
 }
 void TetrisPanel::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) {

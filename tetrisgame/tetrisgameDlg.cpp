@@ -144,6 +144,11 @@ void CtetrisgameDlg::StopTimer()
 	// ID_AUTO_MOVE_TIMER 타이머를 중지
 	KillTimer(ID_AUTO_MOVE_TIMER);
 }
+void CtetrisgameDlg::StartTimer()
+{
+	// ID_AUTO_MOVE_TIMER 타이머를 중지
+	SetTimer(ID_AUTO_MOVE_TIMER, 750, nullptr);
+}
 //--------------------------------------------------------------------------------------------------
 void CtetrisgameDlg::OnSysCommand(UINT nID, LPARAM lParam)
 {
@@ -193,5 +198,5 @@ HCURSOR CtetrisgameDlg::OnQueryDragIcon()
 
 void CtetrisgameDlg::OnBnClickedStart()
 {
-	OnInitDialog();
+	m_TetrisPanel.OnPaint();
 }
