@@ -17,7 +17,7 @@ public:
 protected:
     DECLARE_MESSAGE_MAP()
 private:
-    Tetris game;  // Tetris 게임 객체 추가
+    Tetris *game;  // Tetris 게임 객체 추가
     CString m_strMessage;
     bool isGameOver;
     void HandleGameOverAndRestart();

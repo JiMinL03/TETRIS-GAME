@@ -5,6 +5,7 @@
 #include "tetrisgameDlg.h"
 using namespace std;
 TetrisPanel::TetrisPanel() {
+    game = &Tetris::getIncetance();
 
 }
 TetrisPanel::~TetrisPanel() {
@@ -12,7 +13,7 @@ TetrisPanel::~TetrisPanel() {
 }
 
 void TetrisPanel::OnTimer(UINT_PTR nIDEvent) {
-    game.moveBlock(0);
+    game->moveBlock(0);
     Invalidate();
     CStatic::OnTimer(nIDEvent);
 }
@@ -46,7 +47,7 @@ void TetrisPanel::OnPaint() {
             }
         }
 
-        int* board = game.getBoard();
+        int* board = game->getBoard();
         for (int y = 0; y < BOARD_HEIGHT; y++) {
             for (int x = 0; x < BOARD_WIDTH; x++) {
                 int cellValue = board[y * BOARD_WIDTH + x];
@@ -83,10 +84,10 @@ void TetrisPanel::OnPaint() {
             }
         }
 
-        if (!game.isGameOver()&&!isGameOver) {
+        if (!game->isGameOver()&&!isGameOver) {
             isGameOver = true;
         }
-        else if (game.isGameOver() && isGameOver) {
+        else if (game->isGameOver() && isGameOver) {
             ((CtetrisgameDlg*)GetParent())->StopTimer();  // StopTimer 함수 호출
             HandleGameOverAndRestart(); 
             isGameOver = false;
@@ -97,7 +98,7 @@ void TetrisPanel::HandleGameOverAndRestart()
 {
         int result = AfxMessageBox(_T("GAME OVER! Do you want to restart?"), MB_ICONERROR | MB_YESNO);
         if (result == IDYES) {//"예" 클릭한다면
-            game.initGame();//게임 다시 시작하는 메서드
+            game->initGame();//게임 다시 시작하는 메서드
             ((CtetrisgameDlg*)GetParent())->StartTimer();
             Invalidate();//OnPaint 다시 그리기
         }
@@ -109,23 +110,23 @@ void TetrisPanel::HandleGameOverAndRestart()
 void TetrisPanel :: PressRestartButt() 
 {   
     AfxMessageBox(_T("Do you want to restart?"), MB_OK | MB_ICONINFORMATION);
-    game.initGame();//게임 다시 시작하는 메서드
+    game->initGame();//게임 다시 시작하는 메서드
     Invalidate();//OnPaint 다시 그리기
 }
 
 void TetrisPanel::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) {
     switch (nChar) {
     case VK_UP:
-        game.rotateBlock();  // 위쪽 화살표 키 처리
+        game->rotateBlock();  // 위쪽 화살표 키 처리
         break;
     case VK_DOWN:
-        game.moveBlock(0);  // 아래쪽 화살표 키 처리
+        game->moveBlock(0);  // 아래쪽 화살표 키 처리
         break;
     case VK_LEFT:
-        game.moveBlock(1    );  // 왼쪽 화살표 키 처리
+        game->moveBlock(1    );  // 왼쪽 화살표 키 처리
         break;
     case VK_RIGHT:
-        game.moveBlock(2);  // 오른쪽 화살표 키 처리
+        game->moveBlock(2);  // 오른쪽 화살표 키 처리
         break;
     case 'Q':
         // 'Q' 키를 누르면 어플리케이션 종료

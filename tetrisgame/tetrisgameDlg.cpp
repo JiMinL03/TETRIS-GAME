@@ -135,6 +135,7 @@ void CtetrisgameDlg::OnTimer(UINT_PTR nIDEvent)
 
 		// TetrisPanel의 ontimer 이벤트 호출
 		m_TetrisPanel.OnTimer(nIDEvent);
+		m_NextBlockPanel.Invalidate();
 	}
 
 	CDialogEx::OnTimer(nIDEvent);

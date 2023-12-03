@@ -10,6 +10,6 @@ class NextBlockPanel : public CStatic
     protected:
         afx_msg void OnPaint();
         DECLARE_MESSAGE_MAP()
-        Tetris game;
+        Tetris *game;
 };
 

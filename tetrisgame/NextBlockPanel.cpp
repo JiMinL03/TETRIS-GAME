@@ -2,7 +2,7 @@
 #include "NextBlockPanel.h"
 
 NextBlockPanel::NextBlockPanel() {
-
+    game = &Tetris::getIncetance();
 }
 NextBlockPanel::~NextBlockPanel() {
 
@@ -35,7 +35,7 @@ void NextBlockPanel::OnPaint() {
         }
     }
 
-    Block board = game.getNextBlock();
+    Block board = game->getNextBlock();
     int blockWidth = board.getWidth();
     int blockHeight = board.getHeight();
     for (int y = 0; y < blockWidth; y++) {
