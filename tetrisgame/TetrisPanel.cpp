@@ -82,28 +82,35 @@ void TetrisPanel::OnPaint() {
                 }
             }
         }
-        if (!game.isGameOver()) {
+
+        if (!game.isGameOver()&&!isGameOver) {
             isGameOver = true;
         }
-        if (game.isGameOver() && isGameOver) {
-            HandleGameOverAndRestart();
+        else if (game.isGameOver() && isGameOver) {
+            ((CtetrisgameDlg*)GetParent())->StopTimer();  // StopTimer 함수 호출
+            HandleGameOverAndRestart(); 
+            isGameOver = false;
         }
 	}
 
 void TetrisPanel::HandleGameOverAndRestart()
 {
-
-        ((CtetrisgameDlg*)GetParent())->StopTimer();  // StopTimer 함수 호출
         int result = AfxMessageBox(_T("GAME OVER! Do you want to restart?"), MB_ICONERROR | MB_YESNO);
         if (result == IDYES) {//"예" 클릭한다면
             game.initGame();//게임 다시 시작하는 메서드
-            Invalidate();//OnPaint 재실행
             ((CtetrisgameDlg*)GetParent())->StartTimer();
-            isGameOver = false;
+            Invalidate();//OnPaint 다시 그리기
         }
         else { //"아니오"를 클릭한다면
             ((CtetrisgameDlg*)GetParent())->EndDialog(IDCANCEL); //종료   
         }
+}
+
+void TetrisPanel :: PressRestartButt() 
+{   
+    AfxMessageBox(_T("Do you want to restart?"), MB_OK | MB_ICONINFORMATION);
+    game.initGame();//게임 다시 시작하는 메서드
+    Invalidate();//OnPaint 다시 그리기
 }
 
 void TetrisPanel::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) {
