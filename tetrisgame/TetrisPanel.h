@@ -1,6 +1,6 @@
 #pragma once
-#include "GameBoard.h"
-#include "Block.h"
+#include "../Tetris-Core/GameBoard.h"
+#include "../Tetris-Core/Block.h"
 #include "Tetris.h"
 #include "resource.h"
 #include <vector>

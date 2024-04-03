@@ -1,5 +1,5 @@
 #pragma once
-#include "GameBoard.h"
+#include "../Tetris-Core/GameBoard.h"
 #include "Tetris.h"
 class NextBlockPanel : public CStatic
 {

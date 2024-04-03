@@ -1,0 +1,3 @@
+[submodule "Tetris-Core"]
+	path = Tetris-Core
+	url = https://github.com/cmsong111/Tetris-Core.git
